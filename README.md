@@ -30,6 +30,118 @@ pip install -r requirements.txt
 
 ###  3. Set Up the MySQL Database
 
-    Ensure MySQL Server is installed and running on your system or a remote server.
-    Use the provided create_database.sql script to create the project database and tables:
-        Open MySQL (e.g., via MySQL Workbench or command line):
+-Ensure MySQL Server is installed and running on your system or a remote server.
+-Use the provided create_database.sql script to create the project database and tables:
+```bash
+mysql -u root -p
+SOURCE create_database.sql;
+-- Create the project database
+CREATE DATABASE IF NOT EXISTS project;
+USE project;
+
+-- Table for login information
+CREATE TABLE login_info (
+    user_id VARCHAR(30) NOT NULL,
+    password VARCHAR(15),
+    PRIMARY KEY (user_id)
+);
+
+-- Table for customer details
+CREATE TABLE customer (
+    Customer_id VARCHAR(20) NOT NULL,
+    Name VARCHAR(30) NOT NULL,
+    Phone_no VARCHAR(11) NOT NULL,
+    Age INT NOT NULL,
+    PRIMARY KEY (Customer_id),
+    UNIQUE (Phone_no)
+);
+
+-- Table for staff details
+CREATE TABLE staff (
+    Staff_id VARCHAR(20) NOT NULL,
+    Name VARCHAR(100) NOT NULL,
+    Age INT,
+    Phone_no VARCHAR(15),
+    Address VARCHAR(255),
+    Role VARCHAR(50) NOT NULL,
+    Shift VARCHAR(20),
+    Salary FLOAT,
+    PRIMARY KEY (Staff_id),
+    UNIQUE (Phone_no)
+);
+
+-- Table for station details
+CREATE TABLE station (
+    Station_id VARCHAR(50) NOT NULL,
+    Name VARCHAR(100) NOT NULL,
+    Train_no JSON,
+    Station_master_id VARCHAR(50),
+    PRIMARY KEY (Station_id)
+);
+
+-- Table for train details
+CREATE TABLE train (
+    Train_no VARCHAR(255) NOT NULL,
+    Name VARCHAR(255) NOT NULL,
+    Locopilot_id VARCHAR(255),
+    TTE_id VARCHAR(255),
+    Source_id VARCHAR(255),
+    Destination_id VARCHAR(255),
+    Avail_AC_seats INT DEFAULT 0,
+    Avail_SL_seats INT DEFAULT 0,
+    Avail_UR_seats INT DEFAULT 0,
+    Stops JSON,
+    PRIMARY KEY (Train_no)
+);
+
+-- Table for booking details
+CREATE TABLE booking (
+    Booking_id VARCHAR(10) NOT NULL,
+    User_id VARCHAR(10),
+    Train_no VARCHAR(10),
+    Seat_no VARCHAR(5),
+    Passenger_name VARCHAR(50),
+    Source_id VARCHAR(10),
+    Destination_id VARCHAR(10),
+    Passenger_age INT,
+    PRIMARY KEY (Booking_id)
+);
+
+-- Insert sample data
+INSERT INTO login_info (user_id, password) VALUES
+    ('admin', 'adminpass'),
+    ('cust1', 'custpass'),
+    ('staff1', 'staffpass');
+
+INSERT INTO customer (Customer_id, Name, Phone_no, Age) VALUES
+    ('cust1', 'John Doe', '1234567890', 25);
+
+INSERT INTO staff (Staff_id, Name, Age, Phone_no, Address, Role, Shift, Salary) VALUES
+    ('staff1', 'Jane Smith', 30, '0987654321', '123 Main St', 'Manager', 'Day', 50000.00);
+
+INSERT INTO station (Station_id, Name, Train_no, Station_master_id) VALUES
+    ('S001', 'Central Station', '{"T001"}', 'SM001');
+
+INSERT INTO train (Train_no, Name, Locopilot_id, TTE_id, Source_id, Destination_id, Avail_AC_seats, Avail_SL_seats, Avail_UR_seats, Stops) VALUES
+    ('T001', 'Express Train', 'L001', 'TTE001', 'S001', 'S002', 50, 100, 50, '{"S003", "S004"}');
+
+INSERT INTO booking (Booking_id, User_id, Train_no, Seat_no, Passenger_name, Source_id, Destination_id, Passenger_age) VALUES
+    ('B001', 'cust1', 'T001', 'A01', 'John Doe', 'S001', 'S002', 25);
+```
+-Change this in all the files
+```bash
+    conn = mysql.connector.connect(
+    host="your-server-ip",  # e.g., "192.168.1.100" for remote access
+    user="remote_user",
+    password="secure_password",
+    database="project"
+```
+-For remote access, ensure the MySQL server’s bind-address is set to 0.0.0.0 in my.ini (e.g., C:\ProgramData\MySQL\MySQL Server 8.0\my.ini) and port 3306 is open in your firewall.
+
+###4. Run the Application
+
+-Start the Streamlit app locally:
+```bash
+streamlit run app.py
+```
+-Open your browser and navigate to http://localhost:8501 (local) or http://your-server-ip:8501 (remote, e.g., http://192.168.1.100:8501).
