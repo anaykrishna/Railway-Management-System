@@ -141,10 +141,10 @@ streamlit run app.py
 
 ## Usage
 
-1 . Login: Use the login page to access the app with an existing user_id and password from the login_info table.
-2 . Sign Up: Create a new customer account with a unique Customer_id, password, Name, Phone_no, and Age, which will be added to the customer and login_info tables.
-3 . Navigation: After logging in, use the sidebar to navigate between customer, staff, or admin pages (based on your role).
-4 . Booking Progress: On the customer page, enter a Train_no to view the booking progress with a green-white-orange gradient progress bar, calculated from the booking and train tables.
+1. Login: Use the login page to access the app with an existing user_id and password from the login_info table.
+2. Sign Up: Create a new customer account with a unique Customer_id, password, Name, Phone_no, and Age, which will be added to the customer and login_info tables.
+3. Navigation: After logging in, use the sidebar to navigate between customer, staff, or admin pages (based on your role).
+4. Booking Progress: On the customer page, enter a Train_no to view the booking progress with a green-white-orange gradient progress bar, calculated from the booking and train tables.
 
 ## Configuration
 
