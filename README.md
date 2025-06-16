@@ -18,9 +18,18 @@ Welcome to the Railway Reservation System, a Streamlit-based application for man
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-nam
+git clone https://github.com/anaykrishna/Railway-Management-System.git
+cd Railway-Management-System
 ```
 ###2. Install Dependencies
 
 Install the required Python packages using pip:
+```bash
+pip install -r requirements.txt
+```
+
+###  3. Set Up the MySQL Database
+
+    Ensure MySQL Server is installed and running on your system or a remote server.
+    Use the provided create_database.sql script to create the project database and tables:
+        Open MySQL (e.g., via MySQL Workbench or command line):
