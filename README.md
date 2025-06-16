@@ -131,10 +131,30 @@ INSERT INTO booking (Booking_id, User_id, Train_no, Seat_no, Passenger_name, Sou
 ```
 - For remote access, ensure the MySQL server’s bind-address is set to 0.0.0.0 in my.ini (e.g., C:\ProgramData\MySQL\MySQL Server 8.0\my.ini) and port 3306 is open in your firewall.
 
-###4. Run the Application
+### 4. Run the Application
 
 - Start the Streamlit app locally:
 ```bash
 streamlit run app.py
 ```
-- Open your browser and navigate to http://localhost:8501 (local) or http://your-server-ip:8501 (remote, e.g., http://192.168.1.100:8501).
+- Open your browser and navigate to http://localhost:8501 (local)
+
+## Usage
+
+1. Login: Use the login page to access the app with an existing user_id and password from the login_info table.
+2. Sign Up: Create a new customer account with a unique Customer_id, password, Name, Phone_no, and Age, which will be added to the customer and login_info tables.
+3. Navigation: After logging in, use the sidebar to navigate between customer, staff, or admin pages (based on your role).
+4. Booking Progress: On the customer page, enter a Train_no to view the booking progress with a green-white-orange gradient progress bar, calculated from the booking and train tables.
+
+## Configuration
+
+- Database Credentials: Update the host, user, password, and database in app.py to match your MySQL setup.
+- Firewall: Ensure ports 3306 (MySQL) and 8501 (Streamlit) are open if using remote access.
+- Security: For internet access, enable SSL in MySQL (my.ini) and update the app to use SSL
+
+## Acknowledgements
+
+- Built with Streamlit for the frontend.
+- Powered by MySQL for data management.
+- Gradient progress bar inspired by user customization requests.
+- Last updated: 01:06 PM +04, Monday, June 16, 2025
